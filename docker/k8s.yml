@@ -1,0 +1,115 @@
+# be-file-pvc.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: safe-cr-nodeserver-file-pvc
+  namespace: safe-dev
+spec:
+  storageClassName: 903cloud-nas
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+# be-logs-pvc.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: safe-cr-nodeserver-logs-pvc
+  namespace: safe-dev
+spec:
+  storageClassName: 903cloud-nas
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+# be-svc.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: safe-cr-nodeserver-service
+  namespace: safe-dev
+spec:
+  type: NodePort
+  ports:
+    - port: 32514
+      targetPort: 8011
+      nodePort: 32514
+  selector:
+    app: safe-cr-nodeserver
+    tier: be
+
+---
+# config.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: safe-cr-nodeserver-config
+  namespace: safe-dev
+data:
+  app-config: |
+    {
+        // nodejs 服务端口
+        "port": 8011,
+        // 登陆服务地址（独立服务）
+        "loginServer":"http://192.168.9.65:8082/",
+        // 获取银行地址URL
+        "asoneBankUrlPath":"/getBankUrl",
+        // orgCode cache ttl in seconds
+        "cacheTtl": 600
+    }
+
+---
+
+# deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safe-cr-nodeserver-deployment
+  namespace: safe-dev
+  labels:
+    app: safe-cr-nodeserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-cr-nodeserver
+      tier: be
+  template:
+    metadata:
+      labels:
+        app: safe-cr-nodeserver
+        tier: be
+    spec:
+      containers:
+        - name: safe-cr-nodeserver
+          image: registry.zcbrop.com/safe/safe-cr-nodeserver:1.8.8-20210427161240
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8011
+          volumeMounts:
+            - mountPath: /app/.nodewebrc
+              subPath: path/to/.nodewebrc
+              name: app-config
+            - mountPath: /app/pages/
+              name: page-files
+            - mountPath: /app/logs/
+              name: log-files
+      volumes:
+        - name: page-files
+          persistentVolumeClaim:
+            claimName: safe-cr-nodeserver-file-pvc
+        - name: log-files
+          persistentVolumeClaim:
+            claimName: safe-cr-nodeserver-logs-pvc
+        - name: app-config
+          configMap:
+            name: safe-cr-nodeserver-config
+            items:
+              - key: app-config
+                path: path/to/.nodewebrc

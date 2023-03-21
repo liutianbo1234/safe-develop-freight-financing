@@ -1,0 +1,167 @@
+.detailContainer .verAfter,
+.detailContainer .verBefore {
+  display: none;
+}
+
+.detailContainer .itemTitle {
+  color: #999;
+  font-size: 15px;
+}
+
+.detailContainer .itemTitleRight {
+  font-weight: 700;
+  float: right;
+  color: #0c0c0c;
+}
+
+.detailContainer .payInfo {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #e5e9f2;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-top: 30px;
+}
+
+.detailContainer .everyRow {
+  vertical-align: middle;
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+.detailContainer .spanLabel {
+  color: #666;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.detailContainer .payInfoItemValue {
+  color: #999;
+}
+
+.detailContainer .payInfoItemLabel {
+  text-align: right;
+}
+
+.detailContainer .payInfoItemLabel span {
+  text-align: left;
+  display: inline-block;
+  min-width: 180px;
+}
+
+.detailContainer .required-label:before {
+  content: "* ";
+  color: red;
+}
+
+.detailContainer .invoiceInfo {
+  margin-top: 30px;
+}
+
+.detailContainer .invoiceInfoList {
+  background: #fff;
+  padding: 20px 20px 0 20px;
+  border: 1px solid #e5e9f2;
+  border-radius: 4px;
+  margin-top: 30px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.detailContainer .explain {
+  font-size: 14px;
+  display: none;
+}
+
+.detailContainer .layui-border-box {
+  border-width: 0;
+}
+
+.detailContainer .layui-table-header {
+  border: 0;
+  color: #000;
+}
+
+.detailContainer .layui-table-header thead tr {
+  background-color: #fff;
+}
+
+.detailContainer .layui-table-header thead th {
+  font-weight: bold;
+}
+
+.detailContainer .layui-table-cell {
+  height: auto;
+}
+
+.detailContainer .buttons {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.detailContainer .buttons .onChain {
+  display: none;
+}
+
+.detailContainer .explain {
+  margin-top: 10px;
+  font-weight: bold;
+  color: red;
+}
+
+.detailContainer .excessD,
+.detailContainer #original,
+.detailContainer .checkAll {
+  display: none;
+}
+
+.check-invoice {
+  text-align: center;
+  padding: 50px;
+}
+
+.check-invoice button {
+  margin-top: 10px;
+}
+
+.redSpan {
+  color: red;
+}
+
+.checkbox-disable:hover i {
+  border-color: #dbdbdb !important;
+}
+
+.checkbox-disable {
+  cursor: Default;
+}
+
+.layui-table-header th[data-field="0"] .layui-table-cell {
+  width: 40px;
+}
+
+.overflow {
+  color: red;
+}
+
+.untrue {
+  color: #C1C1C1;
+}
+
+.layui-form-item.remarks {
+  margin-top: 15px;
+}
+
+.goodsOrTaxableServiceName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 150px;
+  line-height: 37px;
+}
+
+.remarks .layui-form-label{
+  text-align: left;
+  padding: 9px 20px;
+  width: 70px;
+}

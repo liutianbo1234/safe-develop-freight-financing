@@ -1,0 +1,61 @@
+{
+  "name": "safe-abroad-fe-service",
+  "version": "1.0.0",
+  "description": "Default project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "start:dev": "lite-server",
+    "build": "webpack",
+    "gulp": "gulp"
+  },
+  "author": "ZCHZ",
+  "license": "ISC",
+  "bin": "./bin/www",
+  "pkg": {
+    "assets": [
+      "bin/**/*"
+    ],
+    "targets": [
+      "node10-linux-x64",
+      "node10-macos-x64",
+      "node10-win-x64"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "copy-webpack-plugin": "^6.0.4",
+    "decimal.js": "^10.2.0",
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.2",
+    "express-session": "^1.17.1",
+    "gulp": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^5.0.0",
+    "gulp-inline-source": "^4.0.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^4.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
+    "http-proxy-middleware": "^2.0.1",
+    "log4js": "^6.3.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "css-loader": "^5.1.1",
+    "es3ify-webpack-plugin": "^0.1.0",
+    "gulp-imagemin": "^5.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "imagemin-pngquant": "^9.0.2",
+    "lite-server": "^2.6.1",
+    "pkg": "^4.5.1",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.5.0"
+  }
+}

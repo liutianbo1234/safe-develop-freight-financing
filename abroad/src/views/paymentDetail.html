@@ -1,0 +1,223 @@
+<script id="check-invoice" type="text/x-custom-template">
+  <div class="check-invoice">
+      <img src="static/img/loading3.gif"/>
+      <p>发票查验中，您可以选择继续等待，或点击下方按钮返回列表页处理其他业务</p>
+      <button class="layui-btn layui-btn-primary layui-border-blue" onclick="handleClickBack()">返回列表页</button>
+  </div>
+</script>
+<style>
+  .remarks {
+    display: none;
+  }
+</style>
+<div class="detailContainer">
+  <div class="layui-clear">
+    <div class="itemTitle layui-inline">付汇信息</div>
+    <h4 class="layui-inline itemTitleRight">
+      业务状态:<span id="paystatus"></span>
+    </h4>
+  </div>
+  <div class="payInfo">
+    <div>
+      <div class="layui-row everyRow">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">融资申请编号: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="shippingCode"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇企业社会统一信用代码: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="paymentEntTaxpayerIdNo"></div>
+        </div>
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇企业名称: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="paymentEntName"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">收汇企业社会统一信用代码: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="receiptEntTaxpayerIdNo"></div>
+        </div>
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">收汇企业名称: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="receiptEntName"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇金融机构代码: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="paymentBankCode"></div>
+        </div>
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇金融机构名称: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="paymentBankName"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">收汇金融机构代码: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="receiptBankCode"></div>
+        </div>
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">收汇金融机构名称: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="receiptBankName"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇申请金额: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="applyAmount"></div>
+        </div>
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇申请币种: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="applyCurrency"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow verBefore">
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇金额: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="amount"></div>
+        </div>
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel">付汇币种: </span>
+          </div>
+          <div class="layui-col-md6 payInfoItemValue" id="currCY"></div>
+        </div>
+      </div>
+      <div class="layui-row everyRow layui-form verAfter" style="margin-bottom: 10px">
+
+        <div class="layui-col-md5 rightPayInfo">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel required-label">付汇金额：</span>
+          </div>
+          <div class="layui-col-md6">
+            <input type="text" class="layui-input" id="amountOK" onblur="amtBlur(this,1)" onfocus="amtFocus(this)" />
+          </div>
+        </div>
+        <div class="layui-col-md5">
+          <div class="layui-col-md6 payInfoItemLabel">
+            <span class="spanLabel required-label">付汇币种：</span>
+          </div>
+          <div class="layui-col-md6">
+            <select lay-filter="selectCurrency" name="currency" id="currency"></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="invoiceInfo">
+    <div class="layui-clear">
+      <div class="itemTitle layui-inline">发票信息</div>
+      <div class="layui-inline itemTitleRight" id="checkButtons">
+        <!-- <button class="layui-btn layui-btn-normal" onclick="pageReload()">刷新</button> -->
+        <button class="layui-btn layui-btn-normal refreshButton" onclick="pageReload()">
+          刷新
+        </button>
+        <button class="layui-btn layui-btn-normal invoiceButton" onclick="checkManifest()">
+          提交发票核验
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="invoiceInfoList">
+    <table class="layui-table" lay-skin="nob">
+      <thead>
+        <tr>
+          <th class="checkAll"><input type="checkbox" id="a1" /></th>
+          <th>序号</th>
+          <th>发票归属地</th>
+          <th>发票类型</th>
+          <th>发票号码</th>
+          <th>发票代码</th>
+          <th>开票日期</th>
+          <th>金额（人民币）</th>
+          <th>税额（人民币）</th>
+          <th>汇率(美元兑人民币)</th>
+          <th>金额（美元）</th>
+          <th>税额（美元）</th>
+          <th>本次使用金额（美元）</th>
+          <th class="excessD">是否超额</th>
+          <th class="excessD">是否真实</th>
+          <th>货物及应税劳务服务名称</th>
+          <th>购买方纳税人识别号</th>
+          <th>销售方纳税人识别号</th>
+        </tr>
+      </thead>
+      <tbody id="Invoice"></tbody>
+    </table>
+  </div>
+  <h1 class="explain" style="margin: 20px 20px">
+    说明：本次付汇存在付汇企业/收汇企业代码与发票项目中
+    销售方纳税人识别号/购买方纳税人识别号不对应的情况
+  </h1>
+  <div class="confirmNote" style="margin: 20px 20px; display: none">
+    <span>确认付汇备注:</span>
+    <span style="word-wrap: break-word" id="confirmNoteText"></span>
+  </div>
+  <div class="cancelNote" style="margin: 20px 20px; display: none">
+    <span>取消付汇备注:</span>
+    <span style="word-wrap: break-word" id="cancelNoteText"></span>
+  </div>
+  <div class="correctNote" style="margin: 20px 20px; display: none">
+    <span>撤销付汇备注:</span>
+    <span style="word-wrap: break-word" id="correctNoteText"></span>
+  </div>
+  <div class="layui-form-item layui-form-text remarks">
+    <label class="layui-form-label">备注</label>
+    <div class="layui-input-block">
+      <textarea maxlength="200" name="desc" id="note" placeholder="请输入发票异常时的付汇取消原因或付汇原因"
+        class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="layui-btn layui-btn-normal" onclick="handleClickBack()">
+      关闭
+    </button>
+    <button href="#" class="layui-btn layui-btn-normal forCancel" onclick="cancelMtion(1)">
+      核验取消
+    </button>
+    <button href="#" class="layui-btn layui-btn-normal foreign" onclick="cancelMtion(2)">
+      拒绝付汇
+    </button>
+    <button href="#" class="layui-btn layui-btn-normal foreign canForeign" onclick="confirmation()">
+      付汇确认
+    </button>
+    <button href="#" class="layui-btn layui-btn-normal recall hide" onclick="recall()">
+      撤销付汇
+    </button>
+    <button type="button" class="layui-btn layui-btn-normal forDown" onclick="downloadInvoiceResult(this)">
+      下载发票核验结果
+    </button>
+    <button href="#" class="layui-btn layui-btn-danger onChain" onclick="onChain()">
+      重新上链
+    </button>
+  </div>
+</div>
+<script type="text/javascript" src="assets/paymentDetail.js"></script>

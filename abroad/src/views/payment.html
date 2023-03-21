@@ -1,0 +1,283 @@
+<style>
+    .layui-form-item {
+        margin: 0px;
+    }
+
+    .treeDiv {
+        border: 1px solid #c2c2c2;
+        padding: 5px;
+    }
+
+    .treeBorder {
+        height: 600px;
+        overflow-y: auto;
+    }
+</style>
+<div class="container">
+    <div class="layui-col-md2 treeCol">
+        <div class="layui-col-md10 treeDiv">
+            <div class="layui-col-md12">
+                <button id="newTreeBtn" class="layui-btn layui-btn-xs layui-btn-normal layui-btn-fluid">
+                    刷新
+                </button>
+            </div>
+            <div class="layui-col-md12 treeBorder">
+                <div id="bankTree" class="ztree"></div>
+            </div>
+        </div>
+    </div>
+    <div class="list-container layui-col-md10 layui-col-xs10 layui-col-sm10">
+        <div class="layui-form" lay-filter="formListArea">
+            <div class="layui-form-item">
+                <div class="layui-inline search-item layui-col-md3">
+                    <label class="layui-inline search-label">业务状态:</label>
+                    <div class="layui-inline" id="paymentSelect">
+                        <select id="paymentState" name="paymentState" type="text" class="status-s"
+                            lay-filter="changeStatus">
+                            <option value="REALERROR">待处理业务</option>
+                            <option value="ALL" selected="">全部</option>
+                            <option value="OVERFLOW">待审核</option>
+                            <option value="INVOICEINFOERROR">待企业确认</option>
+                            <option value="INVOICEINFOERROR">待放款</option>
+                            <option value="INVOICEINFOERROR">待还款</option>
+                            <option value="INVOICEINFOERROR">按期还款</option>
+                            <option value="INVOICEINFOERROR">逾期还款</option>
+                            <option value="INVOICEINFOERROR">超时终止</option>
+                            <option value="INVOICEINFOERROR">审核拒绝</option>
+                            <option value="INVOICEINFOERROR">企业确认拒绝</option>
+                            <option value="INVOICEINFOERROR">放款撤销</option>
+                            <option value="INVOICEINFOERROR">逾期未还款</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline layui-col-md4 search-item">
+                    <label class="layui-inline search-label">申请时间:</label>
+                    <div class="layui-inline">
+                        <input type="text" name="startTime" id="startTime" placeholder="请选择时间" autocomplete="off"
+                            class="layui-input">
+                    </div>
+                    至
+                    <div class="layui-inline">
+                        <input type="text" name="endTime" id="endTime" placeholder="请选择时间" autocomplete="off"
+                            class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline layui-col-md3 search-item">
+                    <label class="layui-inline  search-label">融资业务编号:</label>
+                    <div class="layui-inline">
+                        <input type="text" name="paymentEntCode" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline search-item">
+                    <label class="layui-inline  search-label">申请方企业名称:</label>
+                    <div class="layui-inline">
+                        <input type="text" name="paymentEntTaxpayerIdNo" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline search-item">
+                    <label class="layui-inline search-label">受理方名称:</label>
+                    <div class="layui-inline">
+                        <input type="text" name="paymentEntNameNo" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formList">查询</button>
+                    <button
+                    class="layui-btn layui-btn-danger"
+                    lay-submit
+                    lay-event="supplementaryApply"
+                    onclick="optionHandle();"
+                  >
+                    代申请
+                  </button>
+
+                    <button class="layui-btn layui-btn-normal toApply" onclick="toApply()">导出报表</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <table id="demo" lay-filter="test"></table>
+            <div id="page"></div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="businessDeal">
+    {{# if(d.bizState == 'SUCCESS'){ }}
+    {{# if(d.paymentState == 'APPLY'){ }}
+    <a
+      class="layui-btn layui-btn-xs layui-btn-normal"
+      lay-data="{{ d.financingNo }}"
+      lay-event="auditDeal"
+      onclick="optionHandle();"
+      >处理</a
+    >
+    {{# } else if(d.paymentState == 'AUDIT_CONFIRM'){ }}
+    <a
+      class="layui-btn layui-btn-xs layui-btn-normal"
+      lay-data="{{ d.financingNo }}"
+      lay-event="loanDeal"
+      onclick="optionHandle();"
+      >处理</a
+    >
+    {{# } else { }}
+    <a
+      class="layui-btn layui-btn-xs"
+      lay-data="{{ d.financingNo }}"
+      lay-event="detail"
+      onclick="optionHandle();"
+      >查看</a
+    >
+     {{# } }}
+     {{# } else { }}
+     <a
+     class="layui-btn layui-btn-xs"
+     lay-data="{{ d.financingNo }}"
+     lay-event="detail"
+     onclick="optionHandle();"
+     >查看</a
+   >
+     {{# } }}
+  </script>
+
+<script>
+    var form = layui.form,
+        laydate = layui.laydate,
+        userInfo = window.location.userInfo,
+        layrouter = layui.layrouter,
+        table = layui.table;
+    form.render();
+
+    //时间控件
+    laydate.render({
+        elem: "#startTime",
+        theme: "#1489DB"
+    });
+    laydate.render({
+        elem: "#endTime",
+        theme: "#1489DB"
+    });
+    form.on('submit(formList)', function (data) {
+        if (
+            data.field.startTime &&
+            data.field.endTime &&
+            data.field.startTime.valueOf() >
+            data.field.endTime.valueOf()
+        ) {
+            layer.msg("开始时间需小于结束时间");
+            $('#startTime').val('')
+            $('#endTime').val('')
+            return false;
+        }
+        var Params = window.location.searchParams;
+        Params.paymentState = data.field.paymentState;
+        Params.startTime = data.field.startTime;
+        Params.endTime = data.field.endTime;
+        Params.endTime = data.field.endTime;
+        Params.paymentEntCode = data.field.paymentEntCode;
+        Params.paymentEntNameNo = data.field.paymentEntNameNo;
+        Params.paymentEntTaxpayerIdNo = data.field.paymentEntTaxpayerIdNo;
+        console.log(window.location.searchParams, "window.location.searchParams")
+        tableIns.reload({
+            where: window.location.searchParams || {},
+            page: {
+                curr: 1,
+                limit: 10,
+            },
+        })
+        return false;
+    });
+
+    var tableIns = table.render({
+        elem: '#demo'
+        , url: "http://yapi.zcbrop.com/mock/974/facilitation/spotCheckBatchList.json"
+        , page: true //开启分页
+        , method: "POST"
+        , contentType: 'application/json'
+        , cols: [[ //表头
+            {
+                field: 'id', title: '序号', fixed: 'left',
+                templet: function (d) {
+                    return d.LAY_TABLE_INDEX + 1;
+                },
+            }
+            , { field: 'applyType', title: '融资业务编号', }
+            , { field: 'paymentEntName', title: '融资申请方' }
+            , { field: 'bankOrgCode', title: '融资受理方' }
+            , { field: 'paymentEntTaxpayerIdNo', title: '发票总额' }
+            , { field: 'paymentEntTaxpayerIdNo', title: '融资币种' }
+            , { field: 'paymentEntTaxpayerIdNo', title: '融资金额' }
+            , { field: 'paymentEntTaxpayerIdNo', title: '申请时间' }
+            , {
+                title: "业务状态",
+                align: "center",
+                templet: function (d) {
+                    if (d.bizState == 'SUCCESS') {
+                        return SUCCESS_STATUS[d.paymentState];
+                    }
+                    else if (d.bizState == 'PENDING') {
+                        return PENDING_STATUS[d.paymentState];
+                    } else if (d.bizState == 'FAIL') {
+                        return FAIL_STATUS[d.paymentState];
+                    }
+
+                },
+            },
+            {
+                title: "操作",
+                align: "center",
+                templet: "#businessDeal",
+            },
+        ]],
+        where: {
+            requestPath: "/shipping/queryList",
+            serviceCode: "shippingPayment",
+        },
+        parseData: function (res) { //res 即为原始返回的数据
+            console.log(res, "res")
+            if (res.code == 200) {
+                return {
+                    "code": 0, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.data.totalCount, //解析数据长度
+                    "data": res.data.list //解析数据列表
+                };
+            } else {
+
+            }
+        },
+        request: {
+            pageName: "pageNum",
+            limitName: "pageSize",
+        },
+    });
+  // table操作按钮点击事件
+    var optionHandle = function () {
+    var targetfinancingNo = event.target.getAttribute("lay-data") || "",
+      targetEvent = event.target.getAttribute("lay-event") || "";
+      var bankCode = window.location.searchParams.bankCode;
+    layer.closeAll();
+    switch (targetEvent) {
+      case "supplementaryApply":
+        layrouter.go("/apply");
+        break;
+      case "supplementaryDeal":
+        layrouter.go("/supplementaryPledge/deal",targetfinancingNo);
+        break;
+      case "detail":
+        layrouter.go("/supplementaryPledge/detail", targetfinancingNo);
+        break;
+      default:
+        throw new Error(
+          "当前" +
+            targetEvent +
+            "操作无法匹配原定事件(auditDeal/loanDeal/detail)"
+        );
+    }
+  };
+
+    window.renderBankTree("bankTree", userInfo, tableIns);
+</script>

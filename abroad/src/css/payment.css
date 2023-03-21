@@ -1,0 +1,40 @@
+.container {
+  min-width: 1400px;
+}
+
+.container .layui-table-page {
+  text-align: right;
+}
+
+.container .search-label {
+  min-width: 60px;
+}
+
+.tree-border {
+  padding: 10px;
+  border: 1px solid #979797;
+  border-radius: 3px;
+  overflow: auto;
+}
+
+.list-container {
+  padding: 15px;
+}
+
+.list-container .search-item {
+  margin-bottom: 10px;
+}
+
+.list-container .search-line {
+  height: 38px;
+  margin-bottom: 10px;
+}
+
+.list-container .buttons {
+  text-align: right;
+}
+
+.searchExplain {
+  display: none;
+  color: red;
+}

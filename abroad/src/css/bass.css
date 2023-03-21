@@ -1,0 +1,1453 @@
+html,
+body {
+    min-height: 100%;
+}
+
+html {
+    overflow: auto !important;
+}
+
+body {
+    /* background: #F5F6FA; */
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+#root {
+    min-height: 700px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: -webkit-body, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+    font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: courier new, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a:focus,
+input,
+textarea {
+    outline: none;
+}
+
+.error {
+    color: #E51C23;
+}
+
+.sugg {
+    color: #0B72BB;
+}
+
+.warn {
+    color: #FF9800;
+}
+
+.rel {
+    position: relative;
+}
+
+.wrapper {
+    padding: 15px;
+    background: #fff;
+}
+
+.searchBox {
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.buttonSearchBox {
+    overflow: hidden;
+    margin-bottom: 15px;
+    width: 25%;
+    margin-left: 75%;
+}
+
+.searchBox input,
+.searchBox select,
+.searchBox button {
+    width: 160px;
+    float: left;
+    margin-right: 15px;
+}
+
+.searchBox select.form-control {
+    width: 150px;
+}
+
+.searchBox span {
+    float: left;
+    line-height: 34px;
+    margin-right: 5px;
+}
+
+.searchBox button {
+    width: 80px;
+}
+
+.t-r {
+    text-align: right;
+}
+
+.t-c {
+    text-align: center;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.lh34 {
+    line-height: 34px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.visible {
+    display: none;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: #000 url("../images/loading.gif") center center no-repeat;
+    opacity: .5;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+
+.showTip {
+    position: fixed;
+    z-index: 4;
+    background: #f56c6c;
+    color: #fff;
+    font-size: 14px;
+    right: 0;
+    bottom: 100px;
+    padding: 30px;
+    line-height: 24px;
+}
+
+.backLoad {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 2;
+    opacity: .3;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+}
+
+.prowBox {
+    /* position: fixed; */
+    width: 900px;
+    background: #fff;
+    /* left: 50%; */
+    /* top: 5%; */
+    /* margin-left: -400px; */
+    padding: 0 10px 10px;
+    display: block;
+    border: 1px solid #E5E9F2;
+    z-index: 3;
+}
+
+.prowBox .title {
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    line-height: 40px;
+}
+
+.prowBox .contEnt {
+    padding: 10px;
+    max-height: 390px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.prowBox .contEnt.contEntBox {}
+
+.prowBox .contEnt h3 {
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+
+.prowBox .contEnt table {
+    width: 100%;
+    text-align: center;
+}
+
+.prowBox .contEnt table td,
+.prowBox .contEnt table th {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #E5E9F2;
+    padding: 0 10px;
+}
+
+.prowBox .contEnt.errorlist table {
+    width: 95%;
+}
+
+.prowBox .contEnt.errorlist table td,
+.prowBox .contEnt.errorlist table th {
+    line-height: 20px !important;
+    padding: 5px !important;
+}
+
+.prowBox .contEnt.errorlist h4 {
+    padding: 10px 5px;
+    color: #666;
+    font-weight: normal;
+    background: #fcf8cd;
+    margin-bottom: 10px;
+}
+
+.prowBox .contEnt.errorlist h4 span {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url("../images/warning.png") no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.prowBox .btnBox {
+    text-align: center;
+}
+#btnBox{
+    margin: 0 15px;
+}
+
+.prowBox .contEnt.information {
+    padding: 10px 30px;
+    overflow: hidden;
+    display: block;
+}
+
+.information dl {
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.information dt {
+    float: left;
+    width: 180px;
+    line-height: 34px;
+}
+
+.information dd {
+    margin-left: 200px;
+    line-height: 34px;
+}
+
+.checkManifest {
+    width: 500px;
+    background: #fff;
+    padding: 50px 0;
+    position: fixed;
+    left: 50%;
+    top: 20%;
+    margin-left: -200px;
+    color: #333;
+    z-index: 4;
+    font-size: 14px;
+    text-align: center;
+}
+
+.checkManifest span {
+    width: 200px;
+    height: 200px;
+    background: url("../images/loading3.gif") no-repeat;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.checkManifest p {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.checkManifest a {}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 34px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-indent: 1em;
+}
+
+.form-control.readonly {
+    background: #F6F6F6;
+}
+
+select.form-control {
+    padding: 0 0;
+}
+
+.iscurrency {
+    color: #999;
+}
+
+.ml30 {
+    margin-left: 30px !important;
+}
+
+.laydate-icon {
+    padding-right: 0 !important;
+}
+
+.btn {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1489DB;
+    border-color: #fff;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.btn-outline {
+    background: #fff;
+    border: 1px solid #2e6da4;
+    color: #2e6da4;
+    line-height: 29px;
+}
+
+a.btn {
+    padding: 0 12px;
+    background: #fff;
+    border: 1px solid #2e6da4;
+    color: #2e6da4;
+    height: 32px;
+    line-height: 32px;
+}
+
+a.btn.btn-primary {
+    color: #fff;
+    background-color: #1489DB;
+    border-color: #fff;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #e73040;
+    border-color: #e6a23c;
+}
+
+.t-c a.btn {
+    vertical-align: top;
+}
+
+.btn.btn-primary.disabled,
+.btn.btn-outline.disabled {
+    background: #cacaca;
+    color: #fff;
+    border: none;
+    cursor: not-allowed;
+}
+
+.form-horizontal {}
+
+.form-horizontal .control-group {
+    overflow: hidden;
+    margin-bottom: 15px;
+    clear: both;
+    display: block;
+}
+
+.form-horizontal .control-group .control-label {
+    float: left;
+    width: 180px;
+    line-height: 34px;
+    text-align: right;
+    color: #666;
+}
+
+.form-horizontal .control-group .control-label a,
+.ibox .invoiceList .importTable table thead th a.tip,
+.form-horizontal .label-group .control-label a.tip {
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    background: url("../images/icon-question.png") no-repeat;
+    display: inline-block;
+    margin-left: 2px;
+    margin-top: -1px;
+}
+
+.form-horizontal .control-group .controls {
+    float: left;
+    margin-left: 20px;
+}
+
+.form-horizontal .control-group .controls input,
+.form-horizontal .control-group .controls select {
+    width: 400px;
+}
+
+.form-horizontal .control-group .controls .control-status {
+    line-height: 34px;
+    margin-left: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.ibox {
+    margin-bottom: 15px;
+}
+
+.ibox h4 {
+    font-weight: 100;
+    margin-bottom: 10px;
+    line-height: 34px;
+    font-size: 14px;
+    overflow: hidden;
+    color: #333;
+}
+
+.ibox h4 .btn-info {
+    font-size: 12px;
+    padding: 2px 10px;
+}
+
+.ibox h4 span {
+    float: right;
+}
+
+.ibox h6 {
+    font-weight: normal;
+    float: right;
+}
+
+.ibox h6 a {
+    margin-right: 10px;
+    padding: 0 5px;
+    line-height: 21px;
+}
+
+.ibox h6 a.active {
+    color: #3F87F5;
+}
+
+.contractList {}
+
+.ibox .content {
+    background: #fff;
+    padding: 20px 20px 0 20px;
+    overflow: hidden;
+    border: 1px solid #E5E9F2;
+    font-size: 14px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ibox .content.invoiceList {
+    padding: 0;
+    margin-bottom: 15px;
+    overflow: hidden;
+    display: block;
+    zoom: 1;
+}
+
+.addContent {
+    background: #fff;
+    border: 1px dashed #E5E9F2;
+    font-size: 14px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.addContent a {
+    color: #3F87F5;
+    padding: 15px 0;
+    display: block;
+}
+
+.ibox .content.invoiceList .index {
+    background: #1489DB;
+    color: #fff;
+    width: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.ibox .content .tip {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-horizontal .label-group {
+    overflow: hidden;
+    margin-bottom: 15px;
+    clear: both;
+    display: block;
+}
+
+.form-horizontal .label-group .control-label {
+    float: left;
+    width: 100px;
+    line-height: 34px;
+    text-align: right;
+    color: #666;
+}
+
+.form-horizontal .label-group .controls {
+    float: left;
+    margin-left: 15px;
+}
+
+.form-horizontal .label-group .controls .control-status {
+    line-height: 34px;
+    word-break: break-all;
+}
+
+.ibox .invoiceList .importTitle {
+    width: 380px;
+    float: left;
+}
+
+.ibox .invoiceList .importTable {
+    margin-left: 390px;
+    overflow: hidden;
+    min-height: 235px;
+    display: block;
+    border-left: 1px solid #E5E9F2;
+    padding-top: 10px;
+}
+
+.ibox .invoiceList .importTable input {
+    width: 100%;
+}
+
+.ibox .invoiceList .importTable table {
+    width: 100%;
+    display: block;
+}
+
+.ibox .invoiceList .importTable table thead th {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 16.6%;
+}
+
+.ibox .invoiceList .importTable table tbody td {
+    padding: 0 20px 10px 20px;
+    text-align: center;
+}
+
+.ibox .invoiceList .importTable table tbody td span {
+    vertical-align: middle;
+}
+
+.ibox .invoiceList .importTable table tbody td a.er {
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    background: url("../images/icon-question-red.png") no-repeat;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.ibox .invoiceList .importTable table tbody.invoTbody td {
+    padding: 10px 20px;
+}
+
+.addImg {
+    margin-right: 15px;
+    width: 17px;
+    height: 17px;
+    line-height: 14px;
+    border-radius: 30px;
+    display: inline-block;
+    background: url("../images/zengjia.png") no-repeat;
+}
+
+.delImg {
+    margin-right: 15px;
+    width: 17px;
+    height: 17px;
+    line-height: 14px;
+    border-radius: 30px;
+    display: inline-block;
+    background: url("../images/CombinedShape.png") no-repeat;
+}
+
+.ibox .invoiceList .importTable .add,
+.ibox .invoiceList .importTable .del {
+    margin-right: 15px;
+    width: 17px;
+    height: 17px;
+    line-height: 14px;
+    border-radius: 30px;
+    display: inline-block;
+    background: url("../images/zengjia.png") no-repeat;
+}
+
+.ibox .invoiceList .importTable .del {
+    margin-right: 0;
+    background: url("../images/CombinedShape.png") no-repeat;
+}
+
+.invoiceDeda {
+    border-top: 1px solid #E5E9F2;
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    padding: 0 20px;
+}
+
+.invoiceDeda.border {
+    border: 1px solid #E5E9F2;
+    margin-bottom: 20px;
+}
+
+.invoiceDeda div {
+    float: left;
+    margin-right: 30px;
+}
+
+.invoiceDeda a.dels {
+    float: right;
+    width: 20px;
+    height: 20px;
+    background: url("../images/shanchu.png") no-repeat;
+    display: block;
+    margin-top: 10px;
+}
+
+.lineBox {
+    overflow: hidden;
+    width: 100%;
+}
+
+.lineBox .left,
+.lineBox .right {
+    width: 50%;
+    float: left;
+}
+
+.tableList {
+    width: 100%;
+}
+
+.tableList thead th {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #1489DB;
+    color: #fff;
+    border: 1px solid #E5E9F2;
+}
+
+.tableList tbody td {
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid #E5E9F2;
+}
+
+.tableList em {
+    color: #1489DB;
+    font-size: 12px;
+}
+
+.tableList i,
+.control-status i {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url("../images/yin.png") no-repeat;
+    margin-left: 2px;
+}
+
+/*.tableList i.qi,.control-status i.qi{ width: 20px; height: 20px; display: inline-block; background: url("../images/qi.png") no-repeat; margin-left: 2px;}*/
+.tableList i.qi,
+.control-status i.qi {
+    background: url("../images/qi.png") no-repeat !important;
+}
+
+.tableList td a.btn {
+    vertical-align: top;
+}
+
+.page {
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.pagination {
+    text-align: right;
+    float: right;
+}
+
+.pagination li {
+    float: left;
+}
+
+.pagination li a {
+    float: left;
+    padding: 4px 10px;
+    line-height: 20px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+    cursor: pointer;
+}
+
+.pagination .active>a {
+    color: #fff;
+    background: #1489DB;
+}
+
+.page .totalCount {
+    float: right;
+    margin-left: 10px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+}
+
+.proveLink {
+    background: #fff;
+    border: 1px solid #E5E9F2;
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    padding: 25px 0;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.addForm {
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.addForm .addLine {
+    float: left;
+    margin-right: 15px;
+}
+
+.addForm .addLine span {
+    float: left;
+    line-height: 34px;
+    color: #666;
+}
+
+.addForm .addLine input {
+    float: left;
+    margin-left: 15px;
+    width: 125px;
+}
+
+.addForm.line h4 {
+    font-weight: normal;
+    float: left;
+    line-height: 34px;
+}
+
+.addForm.line .addLine {
+    float: right !important;
+}
+
+.getBankBox {
+    position: absolute;
+    border: 1px solid #ccc;
+    top: 34px;
+    left: 70px;
+    width: 448px;
+    max-height: 214px;
+    overflow-y: scroll;
+    background: #fff;
+}
+
+.getBankBox a {
+    height: 35px;
+    line-height: 35px;
+    display: block;
+    color: #666;
+    padding: 0 10px;
+}
+
+.dialog-tip {
+    line-height: 30px;
+}
+
+.dialog-tip .fileBtn {
+    position: relative;
+    margin: 15px 0;
+}
+
+.dialog-tip .fileBtn .selebtn {
+    position: absolute;
+    right: -1px;
+    top: 1px;
+    z-index: 1;
+    text-align: center;
+    width: 67px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.dialog-tip .fileBtn .opbtn {
+    position: absolute;
+    right: -1px;
+    top: 1px;
+    height: 36px;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+
+.attUpload {
+    position: relative;
+    height: 40px;
+    margin-left: 20px;
+}
+
+.attUpload .fileBtn {
+    position: absolute;
+    left: -30px;
+    top: 0;
+    z-index: 2;
+    height: 36px;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    width: 100px !important;
+    cursor: pointer;
+}
+
+.attUpload .btn {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 70px;
+    padding: 0;
+}
+
+.attachmentList {
+    overflow: hidden;
+    clear: both;
+    margin-left: 20px;
+}
+
+.attachmentList li {
+    width: 120px;
+    display: block;
+    margin: 0 10px 0 0;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+.attachmentList li span {
+    width: 120px;
+    height: 90px;
+    display: block;
+    background: url("../images/fileimg.png") center center no-repeat;
+}
+
+.attachmentList li p {
+    width: 120px;
+    text-align: center;
+    color: #333;
+    height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.attachmentList li a {
+    color: #f00;
+    position: absolute;
+    right: 12px;
+    top: -5px;
+}
+
+.errorTip {
+    text-align: center;
+    margin: 50px auto;
+}
+
+.errorTip img {}
+
+.errorTip p {
+    font-size: 14px;
+}
+
+.appenDages a {
+    width: 120px;
+    display: block;
+    margin: 0 10px 0 0;
+    float: left;
+    cursor: pointer;
+}
+
+.appenDages a span {
+    width: 120px;
+    height: 90px;
+    display: block;
+    background: url("../images/fileimg.png") center center no-repeat;
+}
+
+.appenDages a p {
+    width: 120px;
+    text-align: center;
+    color: #333;
+    height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.prowBox .contEnt.appenDages h3 {
+    margin-bottom: 0;
+    clear: both;
+    display: block;
+}
+
+.prowBox .contEnt.refuseText {
+    padding: 10px;
+}
+
+.refuseText textarea {
+    width: 95%;
+    height: 50px;
+    margin: 15px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.finError {
+    margin-bottom: 15px;
+}
+
+.finError h4 {
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.finError h4 span {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url("../images/warning.png") no-repeat;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.finError .info {
+    padding: 8px;
+    color: #666;
+    font-weight: normal;
+    background: #fcf8cd;
+    margin-bottom: 10px;
+}
+
+.finError .info p {
+    line-height: 30px;
+    word-break: break-all;
+}
+
+.waringTip {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url("../images/warning.png") no-repeat;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/*还款*/
+.tableBox {
+    width: 90%;
+    margin: 0 auto 20px;
+}
+
+.tableBox button {
+    float: right;
+}
+
+.tableBox table {
+    width: 100%;
+    display: block;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.tableBox table th {
+    height: 25px;
+    line-height: 25px;
+}
+
+.tableBox table tr td,
+.tableBox table th {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.tableBox a.add,
+.tableBox a.del {
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    background: url("../images/zengjia.png") no-repeat;
+    margin: 0 15px;
+}
+
+.tableBox a.del {
+    background: url("../images/CombinedShape.png") no-repeat;
+}
+
+/*弹框*/
+.twoTips,
+.twoTip2,
+.twoTipsWithCallback {
+    display: none;
+}
+
+.twoTip2 .btn-outline {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.twoTip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    width: 400px;
+    background: #fff;
+    border: 1px solid #b2b2b2;
+    margin: -150px 0 0 -270px;
+}
+
+.twoTip .tipBody {
+    line-height: 26px;
+    background: url("../images/question.png") no-repeat 20px 40px;
+    padding: 40px 20px;
+    text-indent: 25px;
+}
+
+.twoTip .tipFooter {
+    text-align: center;
+    padding: 0 0 15px;
+}
+
+@media print {
+    @page {
+        margin: 1cm;
+    }
+
+    table {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    .ibox .invoiceList .importTitle {
+        width: 200px;
+        margin-left: 20px;
+    }
+
+    .ibox .invoiceList .importTable {
+        margin-left: 200px;
+    }
+
+    .form-horizontal .control-group .controls {
+        margin-left: 200px;
+        float: none !important;
+    }
+
+    .t-c {
+        display: none;
+    }
+
+    .finError H4 span {
+        display: none;
+    }
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.goBack {
+    float: right;
+}
+
+.form-control-item {
+    display: block;
+    width: 100%;
+    height: 34px;
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 34px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    text-indent: 1em;
+    margin: 8px 0;
+}
+
+.form-control-item span {
+    float: left;
+}
+
+.form-control-item select,
+.form-control-item input[name="authStTime"],
+.form-control-item input[name="authEdTime"] {
+    float: right;
+    width: 300px;
+}
+
+.prowBox-box {
+    width: 400px;
+    margin-left: -200px;
+    padding: 20px 50px 10px;
+    left: 44%;
+}
+
+.form-control-entCode {
+    width: 200px;
+    float: right;
+}
+
+.form-control-code {
+    width: 200px;
+}
+
+.form-control-auth-submit,
+.form-control-submit {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.form-control-submit button {
+    width: 30%;
+    margin: 0 20px;
+}
+
+.bizForm {
+    margin: 20px 0;
+    height: 30px;
+}
+
+.bizForm-item {
+    width: 48%;
+    float: left;
+}
+
+.biz-h1 {
+    font-size: 1.4em;
+    margin: 20px 0;
+}
+
+.biz-btn-box {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+
+.biz-btn-box a {
+    width: 20%;
+}
+
+.auth-btn {
+    width: 30%;
+    margin: 0 10px;
+}
+
+.get-new-btn {
+    float: right;
+    width: 80px;
+    margin: 0 10px;
+}
+
+.biz-label {
+    border: 1px solid black;
+    padding: 10px 20px;
+}
+
+.bizHeader {
+    border-bottom: 1px solid black;
+}
+
+.pdf-btn {
+    background-color: #2fabca;
+    color: #fff;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    float: right;
+}
+
+#bizDetailCredit {
+    margin-top: 30px;
+}
+
+.paymentapply-search {
+    float: left;
+    line-height: 34px;
+    text-align: center;
+    width: 150px;
+}
+
+.ie-currency {
+    /*margin-left: 20px*/
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .chrome-currency {
+        margin-left: 0
+    }
+}
+
+.a-disabled {
+    color: #D4D4D4;
+    cursor: default;
+}
+
+.a-disabled :hover {
+    text-decoration: none
+}
+
+.has-error {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.has-error:focus {
+    border-color: #843534;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+}
+
+.has-success {
+    border-color: #3c763d;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.has-success:focus {
+    border-color: #2b542c;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+}
+
+.form-horizontal .control-label {
+    padding-top: 0;
+}
+
+.layui-btn-normal,
+.layui-layer-btn0 {
+    background-color: #1489DB;
+    border-color: #1489DB;
+    vertical-align: middle;
+}
+
+.layui-form-select dl dd.layui-this {
+    background-color: #1489DB !important;
+}
+
+#page {
+    text-align: right;
+}
+
+.layui-laypage {
+    background-color: #fff;
+    padding: 5px 5px 0;
+}
+
+.layui-layer {
+    position: absolute !important;
+}
+
+.layui-layer-msg,
+.layui-layer-loading,
+.layui-layer-dialog,
+.layui-layer-page {
+    position: fixed !important;
+}
+
+.layui-table {
+    color: #000;
+}
+
+.list_tab {
+    margin-bottom: 20px;
+}
+
+.list_tab .a_active {
+    color: #1489DB;
+}
+
+.list_tab a:hover {
+    color: #1489DB;
+}
+a:hover{
+    color: #1489DB;
+}
+a{
+    color: #1489DB;
+}
+.clear:after {
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}

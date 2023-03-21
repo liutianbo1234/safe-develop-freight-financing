@@ -1,0 +1,212 @@
+<style>
+  .cardCommon {
+    width: 100%;
+    border: 1px solid #c2c2c2;
+    margin-top: 5px;
+  }
+
+  .cardTwo {
+    width: 100%;
+    min-height: 300px;
+    padding: 15px;
+  }
+
+  .cardThree {
+    overflow-x: auto;
+    padding: 10px;
+  }
+
+  .cardSix {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .cardSix>div {
+    text-align: center;
+  }
+
+  #steps {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  h4 {
+    color: #393d49;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  #auditFail {
+    display: none;
+  }
+
+  .loadinfoeveryRow {
+    padding: 15px 15px;
+    text-align: center;
+  }
+  .quantly{
+    height: 40px;
+    line-height:40px;
+    margin-left: 20px;
+  }
+</style>
+
+<div class="layui-form">
+  <div class="layui-row" style="margin-top: 20px">
+    <h4>融资申请信息:</h4>
+    <div id="loanInfo" class="layui-row cardCommon cardOne">
+      <div class="layui-row loadinfoeveryRow">
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资业务编号:</div>
+          <div class="layui-col-md9"></div>
+        </div>
+      </div>
+      <div class="layui-row loadinfoeveryRow">
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资申请方:</div>
+          <div class="layui-col-md5">
+            <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+          </div>
+        </div>
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资申请方企业组织机构代码:</div>
+          <div class="layui-col-md5">
+            <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+          </div>
+        </div>
+      </div>
+      <div class="layui-row loadinfoeveryRow">
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资受理方:</div>
+          <div class="layui-col-md5">
+            <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+          </div>
+        </div>
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资受理方金融机构标识码:</div>
+          <div class="layui-col-md5">
+            <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+          </div>
+        </div>
+      </div>
+      <div class="layui-row loadinfoeveryRow">
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资申请币种:</div>
+          <div class="layui-col-md5">
+            <select lay-filter="approvalCurrency" name="approvalCurrency" id="approvalCurrency" lay-verify="required"
+              lay-reqtext="预计放款币种不能为空">
+            </select>
+          </div>
+        </div>
+        <div class="layui-col-md6">
+          <div class="layui-col-md3">融资申请金额:<span class="amout"></span></div>
+          <div class="layui-col-md5">
+            <input type="text" name="memberEnterpriseName"  autocomplete="off" class="layui-input" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layui-row" style="margin-top: 20px">
+    <h4>运费信息: <button type="button" id="add-btn"  class="layui-btn layui-btn-normal">添加发票</button></h4>
+    <div id="cardTwo" class="layui-row cardCommon cardTwo"></div>
+  </div>
+  <div class="layui-row cardCommon">
+       <div class="quantly">
+          发票数量:<span class="quNum"></span>&nbsp;&nbsp;&nbsp;&nbsp;发票总金额:<span class="quAmout"></span>
+       </div>
+  </div>
+  <div class="layui-row" style="margin-top: 20px">
+    <h4>贸易背景证明文件:</h4>
+    <div id="cardThree" class="layui-row cardCommon cardThree"></div>
+  </div>
+  <div class="layui-row cardSix">
+    <div class="layui-col-md2 layui-col-md-offset2">
+      <button class="layui-btn layui-btn-primary layui-border-blue" lay-submit lay-filter="barkCnt">
+        关闭
+      </button>
+    </div>
+    <div class="layui-col-md2">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="supplementaryReject">
+        补充质押物驳回
+      </button>
+    </div>
+    <div class="layui-col-md2">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="supplementaryPass">
+        补充质押物确认
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  var layrouter = layui.layrouter
+  var auditInfoPageObj = {
+    form: layui.form,
+    initCurrencySelect: function () {
+      var currencyListHtml = renderCurrencyList();
+      $("#approvalCurrency").append($(currencyListHtml));
+      this.form.render("select");
+    },
+    supplyDeal: function () {
+      layrouter.register({
+        //运费信息
+        path: "/components/transportation",
+        component: "./src/views/components/transportation.html",
+        viewId: "cardTwo",
+      });
+      layrouter.register({
+        //运费信息
+        path: "/components/unpload",
+        component: "./src/views/components/unpload.html",
+        viewId: "cardThree",
+      });
+
+      layrouter.loadComponents([
+        {
+          hash: "/components/transportation", //步骤条
+          data: {},
+        },
+        {
+          hash: "/components/unpload", //步骤条
+          data: {},
+        },
+      ])
+    }
+
+  }
+  auditInfoPageObj.initCurrencySelect()
+  auditInfoPageObj.supplyDeal()
+  // $.ajax({
+  //   method: 'POST',
+  //   // url: "http://yapi.zcbrop.com/mock/938/warehouse/supply/detail",
+  //   url:"api/warehouse/supply/detail",
+  //   dataType: 'json',
+  //   contentType: "application/json",
+  //   headers: {
+  //     'Content-Type': 'application/json;charset=utf8'
+  //   },
+  //   data: JSON.stringify(params),
+  //   success: function (res) {
+  //     if (res.code == "SUCCESS") {
+  //       supplyDeal(res.detail)
+  //     } else {
+  //       message(res.msg, 2)
+  //     }
+
+  //   },
+  //   complete: function (res) {
+  //     layer.closeAll('loading');
+  //   },
+  //   error: function (res) {
+  //     if (res.status == 403) {
+  //       message('登录时间过长请重新登录', 2)
+  //     } else {
+  //       message('内部服务异常', 2)
+  //     }
+  //   }
+  // });
+
+
+</script>

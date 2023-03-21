@@ -1,0 +1,28 @@
+# Job.yml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: safe-freight-fe-serveice-page-job
+  namespace: safe-dev
+  labels:
+    app: safe-freight-fe-serveice-page
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: safe-freight-fe-serveice-page
+        tier: be
+    spec:
+      containers:
+        - name: safe-freight-fe-serveice-page
+          image: registry.zcbrop.com/safe/safe-freight-fe-serveice-page:1.9.2-20210730100452
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /app/
+              name: page-files
+      restartPolicy: Never
+      volumes:
+        - name: page-files
+          persistentVolumeClaim:
+            claimName: safe-cr-nodeserver-file-pvc

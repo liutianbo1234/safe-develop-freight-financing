@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="tree-container layui-col-md2 layui-col-xs2 layui-col-sm2">
+    <div class="tree-border">
+      <button
+        style="width: 100%; margin-bottom: 10px"
+        class="
+          layui-btn layui-btn-xs layui-btn-fluid layui-btn-normal
+          refreshTree
+        "
+      >
+        刷新
+      </button>
+      <div id="orgTree" class="ztree"></div>
+    </div>
+  </div>
+  <div class="list-container layui-col-md10 layui-col-xs10 layui-col-sm10">
+    <form class="layui-form layui-clear" lay-filter="formListArea">
+      <div class="list_tab">
+        <a onclick="linkTo('/list')">付汇业务管理</a>
+        <a class="a_active">付汇数据统计</a>
+      </div>
+      <div class="search-line clear">
+        <div class="layui-inline search-item">
+          <label class="layui-inline search-label">企业名称:</label>
+          <div class="layui-inline">
+            <input
+              type="text"
+              name="entName"
+              placeholder="支持模糊查询"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+        </div>
+        <div class="layui-inline search-item">
+          <label class="layui-inline search-label">企业统一社会信用代码:</label>
+          <div class="layui-inline">
+            <input
+              type="text"
+              name="entSocialCode"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+        </div>
+        <div class="layui-inline search-item">
+          <label class="layui-inline search-label">付汇时间:</label>
+          <div class="layui-inline">
+            <input
+              type="text"
+              name="startDate"
+              id="startDate"
+              placeholder="请选择时间"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+          至
+          <div class="layui-inline">
+            <input
+              type="text"
+              name="endDate"
+              id="endDate"
+              placeholder="请选择时间"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+        </div>
+        <div class="layui-inline search-item fr">
+          <button
+            type="button"
+            class="layui-btn layui-btn-normal"
+            lay-submit
+            lay-filter="formList"
+          >
+            统计
+          </button>
+          <button
+            type="button"
+            class="layui-btn layui-btn-normal"
+            onclick="exportHandle()"
+          >
+            导出
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="layui-form-item">
+      <table id="paymentList" lay-filter="payment-table"></table>
+      <table class="tableList">
+        <thead>
+          <th>序号</th>
+          <th>企业统一社会信用代码</th>
+          <th style="width: 400px">企业名称</th>
+          <th>运费支付笔数</th>
+          <th>查验发票次数</th>
+          <th>付汇金额（美元）</th>
+        </thead>
+        <tbody id="tbodyList"></tbody>
+      </table>
+      <div id="page"></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="assets/statistics.js"></script>

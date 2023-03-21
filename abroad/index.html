@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>境内运费外汇支付</title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <script type="text/javascript" src="extends/jquery-1.9.1.min.js"></script>
+  <!--兼容IE8-->
+  <script type="text/javascript" src="./extends/compatibleIE8.js"></script>
+  <!-- 引入redux -->
+  <script type="text/javascript" src="./redux/redux.js"></script>
+  <!-- 引入layui核心css库 -->
+  <link rel="stylesheet" href="./layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="./zTreeStyle/zTreeStyle.css">
+  <link rel="stylesheet" href="src/css/bass.css" media="all">
+  <link rel="stylesheet" href="src/css/paymentDetail.css" media="all" />
+  <link rel="stylesheet" href="src/css/payment.css" media="all" />
+  <link rel="stylesheet" href="src/css/paymentApply.css" media="all" />
+</head>
+
+<body>
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="extends/respond.fix.js"></script>
+    <![endif]-->
+  <!-- 路由会将子页面加载到此div中，可以不是div标签，但id一定要为root，且全局唯一 -->
+  <div style="padding: 15px" id="root">
+
+  </div>
+  <script type="text/javascript" src="extends/jquery.ztree.core.js"></script>
+  <script type="text/javascript" src="layui/layui.js"></script>
+  <script type="text/javascript" src="extends/models/storeList.js"></script>
+  <script type="text/javascript" src="extends/autoRedux.js"></script>
+  <script type="text/javascript" src="extends/util.js"></script>
+  <script type="text/javascript" src="extends/renderTree.js"></script>
+  <script type="text/javascript" src="extends/index.js"></script>
+</body>
+
+</html>

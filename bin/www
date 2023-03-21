@@ -1,0 +1,317 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const app = require('../app');
+const debug = require('debug')('nodeweb:server');
+const http = require('http');
+
+// logging ==>
+const log4js = require("log4js");
+log4js.configure({
+  appenders: {
+    everything: {
+      type: 'dateFile',
+      filename: 'logs/' + 'all-logs.log',
+      pattern: '.yyyy-MM-dd',
+      compress: true,
+      daysToKeep: 30
+    },
+    error: {
+      type: 'dateFile',
+      filename: 'logs/' + 'error-logs.log',
+      pattern: '.yyyy-MM-dd',
+      compress: true,
+      daysToKeep: 30
+    },
+    access: {
+      type: 'dateFile',
+      filename: 'logs/' + 'access-logs.log',
+      pattern: '.yyyy-MM-dd',
+      compress: true,
+      daysToKeep: 30
+    }
+  },
+  categories: {
+    default: { appenders: [ 'everything' ], level: 'info'},
+    error: { appenders: [ 'error' ], level: 'error'},
+    access: { appenders: [ 'access' ], level: 'info'},
+  }
+});
+
+const logger = log4js.getLogger();
+logger.level = "info";
+
+const loggerError = log4js.getLogger('error');
+loggerError.level = "error";
+
+const loggerAccess = log4js.getLogger('access');
+loggerAccess.level = "info";
+
+// logging <==
+
+const express = require("express");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+const axios = require("axios");
+const cookieParser = require("cookie-parser");
+const cookie = require("cookie");
+const session = require("express-session");
+const morgan = require("morgan");
+const NodeCache = require("node-cache");
+const config = require("rc")("nodeweb", {});
+
+const cache = new NodeCache();
+
+const cacheTtl = config.port || 600;
+const orgCodeService = require("./orgCodeService.js")(
+    // url
+  `${config["loginServer"]}${config["asoneBankUrlPath"]}`,
+    // cache instance
+    cache,
+    // logger
+    logger,
+    // cache ttl
+    cacheTtl
+);
+const mapToRole = require("./rolemap.js");
+const router = require("./router.js");
+
+// log config file
+logger.info("config", config);
+
+/**
+ * Get port from environment and store in Express.
+ */
+const port = normalizePort(process.env.PORT || config.port);
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port, function () {
+  logger.info(`node app listening on port ${port}!`);
+});
+
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+
+// http log
+app.use(morgan("combined", {
+  "stream": {
+    // use this method to enhance log file rolling by day and compress
+    write: function(str) { loggerAccess.info(str); }
+  }
+}));
+
+// app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.use(cookieParser("nodeserver"));
+app.use(
+  session({
+    secret: "nodeserver", //与cookieParser中的一致
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(createProxyMiddleware("**/*.do", {
+  target: config["loginServer"],
+  changeOrigin: true
+}));
+
+
+
+function loginByBank(host, userType, loginResultSign, ltpaToken, referer, pathRole,cookies) {
+  // console.log(pathRole,"pathRolepathRolepathRole")
+  var role = pathRole;
+  var queryParams = `?userType=${userType}&login_result_sign=${loginResultSign}&LTPAToken=${ltpaToken}&role=${role}`;
+  var realUrl = `${host}${queryParams}`;
+  logger.info(`loginByBank -> realUrl , ${realUrl}, query, ${queryParams}, cookies, ${cookies}, role, ${role}`);
+  // avoid bank resolve error
+  var cookieStr = "NODE_COOKIE=NODE_COOKIE_VALUE";
+  return axios({
+    method: "GET",
+    url: realUrl,
+    headers: {
+      Referer: referer,
+      Cookie: cookieStr
+    },
+  });
+}
+
+function render(req, res, cookies) {
+  var orgCode = req.param("orgCode");
+  var role = req.param("role");
+  var tokenId = req.param("tokenId");
+  req.session.orgCode = orgCode;
+
+  logger.info(`render -> orgCode: ${orgCode}, role: ${role}, tokenId: ${tokenId}, cookies: ${cookies}`);
+
+  var filePath = router(role, logger);
+  logger.info(`route for ${role} -> ${filePath}`);
+
+  for (var i in cookies) {
+    var parsedCookie = cookie.parse(cookies[i]);
+    var name;
+    // 获取cookie名称
+    for (name in parsedCookie) {
+      break;
+    }
+    // 设置httpOnly属性
+    var opt = {
+      httpOnly: true
+    };
+    if (parsedCookie['Path']) {
+      opt.path = parsedCookie['Path'];
+    }
+
+    // 设置Cookie
+    logger.info(`Set-Cookie: ${name} ${parsedCookie[name]}`);
+    res.cookie(name, parsedCookie[name], opt);
+  }
+  res.redirect(301, filePath + "?page=" + role);
+}
+
+
+app.get("/route", function (req, res) {
+  var orgCode = req.param("orgCode");
+  var role = req.param("role");
+  var role1 = role.replace("/","")
+  var userType = req.param("userType");
+  var loginResultSign = req.param("loginResultSign");
+  var ltpaToken = req.param("ltpaToken");
+
+  var result = cache.get(orgCode);
+  function doRenderView(resp) {
+    render(req, res, resp.headers["set-cookie"]);
+  }
+  if (result) {
+    logger.info(`hint orgCode => url cache ${orgCode} => ${result}`);
+    loginByBank(result, userType, loginResultSign, ltpaToken, req.headers["referer"],role1)
+      .then(doRenderView);
+  } else {
+    logger.info(`can not find orgCode => url from cache ${orgCode}`);
+    orgCodeService(orgCode, (bankUrl) => {
+      logger.info(bankUrl);
+      loginByBank(bankUrl, userType, loginResultSign, ltpaToken, req.headers["referer"],role1)
+        .then(doRenderView);
+    }, (error) => {
+      loggerError.error(error);
+      res.send('{"code":"LOGIN_FAILED"}');
+      res.end();
+    }
+    );
+  }
+});
+
+app.use(
+  createProxyMiddleware("**/api/**", {
+    // 参数不能为空限制，实际代理不会使用此地址
+    target: "http://fake:9999",
+    logLevel: "debug",
+    changeOrigin: true,
+    pathRewrite: {
+      ".*/api": "", // rewrite path
+    },
+    onError: function onError(err, req, res) {
+      loggerError.error(`proxy encountered an error origin: ${req.originalUrl}, parsed: ${req.url}.`, err);
+    },
+    onProxyReq: function (proxyReq, req, res) {
+      if (req['x-abort-proxy']) {
+        logger.warn(`abort proxy request code: ${req['x-abort-proxy']}`);
+        res.status(403).end();
+        proxyReq.destroy();
+      }
+    },
+    router: async function (req) {
+      var orgCode = req.session["orgCode"];
+      if (!orgCode) {
+        req['x-abort-proxy'] = 'NOT_LOGIN';
+        return null;
+      }
+
+      var result = cache.get(orgCode);
+      if (result) {
+        logger.info(`hint orgCode => url cache ${orgCode} => ${result}`);
+      } else {
+        logger.info(`can not find orgCode => url from cache ${orgCode}`);
+        try {
+          result = await orgCodeService(
+            orgCode,
+            (bankUrl) => {
+              return bankUrl;
+            },
+            (error) => {
+              loggerError.error(error);
+              return null;
+            }
+          );
+        } catch (err) {
+          req['x-abort-proxy'] = 'ACQUIRE_BANK_URL_ERROR';
+          return null;
+        }
+
+      }
+      if (result) {
+        var realUrl = result.replace(/\/redirect\.do$/, "");
+        logger.info(`route url is ${realUrl}`);
+        return realUrl;
+      } else {
+        req['x-abort-proxy'] = 'ACQUIRE_BANK_URL_FAIL';
+        return null;
+      }
+    },
+  })
+);
+
+app.get("*", function (req, res) {
+  logger.info(`can resolve request ${req.originalUrl} then return 404 page`);
+  res.send("404 not found", 404);
+});

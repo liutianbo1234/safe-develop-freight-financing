@@ -1,0 +1,212 @@
+.applyContainer .itemTitle {
+  color: #999;
+  font-size: 15px;
+}
+
+.applyContainer .itemTitleRight {
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+  float: right;
+}
+
+.applyContainer .payInfo {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #e5e9f2;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-top: 30px;
+}
+
+.applyContainer .everyRow {
+  vertical-align: middle;
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+.applyContainer .spanLabel {
+  font-weight: 500;
+  font-size: 16px;
+  float: left;
+  color: #333;
+}
+
+.applyContainer .checkError {
+  color: red;
+}
+
+.applyContainer .inputError {
+  border: 2px solid red;
+}
+
+.applyContainer .permissionError {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 20px;
+  display: none;
+}
+
+.applyContainer .layui-input[disabled] {
+  background-color: #fafafa;
+}
+
+.applyContainer .invoiceInfo {
+  margin-top: 30px;
+}
+
+.applyContainer .invoiceInfoList {
+  background: #fff;
+  padding: 10px 20px;
+  border: 1px solid #e5e9f2;
+  border-radius: 4px;
+  margin-top: 30px;
+  /* max-height: 500px;
+  overflow: auto; */
+}
+
+.invoiceInfoList .layui-table td,
+.layui-table th {
+  padding: 8px;
+}
+
+.applyContainer .buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.applyContainer .buttonDisable {
+  cursor: not-allowed;
+}
+
+.invoiceUploadform {
+  line-height: 30px;
+  padding: 20px;
+}
+
+.prowBox {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.prowBox #excelErrorTip {
+  text-align: center;
+}
+
+.bank-list {
+  padding: 20px;
+  overflow: auto;
+  max-height: 500px;
+}
+
+.bank-list a {
+  color: #1489db;
+}
+
+.bank-list .layui-input[disabled] {
+  background-color: #fafafa;
+}
+
+.inputTip {
+  display: none;
+  background-color: #fff;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.inputTip li {
+  padding: 3px 5px;
+  cursor: default;
+  display: flex;
+}
+
+.inputTip li:hover {
+  background: #e8e8e9;
+}
+
+.goodsNameDiv .layui-input {
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 150px;
+  line-height: 37px;
+  padding: 0 10px;
+}
+
+.inputGoodsTip {
+  display: none;
+  background-color: #fff;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 999;
+  width: 290px;
+  /* max-height: 200px; */
+  overflow: auto;
+  height: 200px;
+}
+
+.inputGoodsTip div {
+  padding: 3px 5px;
+  cursor: default;
+  display: flex;
+}
+
+.inputGoodsTip div:hover {
+  background: #e8e8e9;
+}
+
+.invoiceTypeDiv .layui-input {
+  width: 120px;
+  line-height: 37px;
+  position: relative;
+}
+
+.invoiceTypeDiv .inputGoodsTip {
+  width: 120px;
+}
+
+.invoiceRegionDiv .layui-input {
+  width: 60px;
+  line-height: 37px;
+  position: relative;
+}
+
+.invoiceRegionDiv .inputGoodsTip {
+  width: 50px;
+}
+
+.goodsText {
+  width: 600px;
+  margin: 20px auto;
+}
+
+.calculationDiv {
+  line-height: 37px;
+  background-color: #FAFAFA;
+}
+
+#goodsText {
+  text-align: center;
+}
+
+.listEdge {
+  position: absolute;
+  right: 5px;
+  top: 15px;
+  width: 0px;
+  height: 0px;
+  border: 6px solid #000;
+  border-top-color: #C2C2C2;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}

@@ -1,0 +1,131 @@
+<style>
+  .mark {
+    width: 20px;
+    height: 20px;
+    background-color: #579ddf;
+    display: inline-block;
+    border-radius: 20px;
+    margin: 0 10px;
+  }
+  .layui-icon-help {
+    color: #f2f6fa;
+  }
+  .index {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(29, 148, 228);
+    color: #f2f6fa;
+    font-size: 18px;
+    text-align: center;
+    display: inline-block;
+  }
+  .remove-btn {
+    display: inline-block;
+    color: rgb(29, 148, 228);
+    font-weight: 700;
+    font-size: 30px;
+  }
+  .onelist {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+</style>
+<script id="invoice-input-tsingtao" type="text/x-custom-template">
+  <div class="layui-row cardCommon">
+    <div class="onelist"><span class="index"></span><span class="layui-icon-close layui-icon remove-btn"></span></div>
+    <div class="layui-row loadinfoeveryRow">
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">发票号码:<div title="北港物流开具的运输票" class="mark"><i class="layui-icon layui-icon-help"></i></div></div>
+        <div class="layui-col-md4">
+          <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+        </div>
+        <div class="layui-col-md2">
+          <button type="button" id="searchList" class="layui-btn layui-btn-normal">查询</button><div title="查询后根据发票自动带出查询信息" class="mark"><i class="layui-icon layui-icon-help"></i>
+        </div>
+      </div>
+    </div>
+    <div class="layui-row loadinfoeveryRow">
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">发票代码:</div>
+        <div class="layui-col-md5">
+          <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+        </div>
+      </div>
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">融资申请方企业组织机构代码:</div>
+        <div class="layui-col-md5">
+          <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+        </div>
+      </div>
+    </div>
+    <div class="layui-row loadinfoeveryRow">
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">融资受理方:</div>
+        <div class="layui-col-md5">
+          <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+        </div>
+      </div>
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">融资受理方金融机构标识码:</div>
+        <div class="layui-col-md5">
+          <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+        </div>
+      </div>
+    </div>
+    <div class="layui-row loadinfoeveryRow">
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">融资申请币种:</div>
+        <div class="layui-col-md5">
+          <select lay-filter="approvalCurrency" name="approvalCurrency" id="approvalCurrency" lay-verify="required"
+            lay-reqtext="预计放款币种不能为空">
+          </select>
+        </div>
+      </div>
+      <div class="layui-col-md6">
+        <div class="layui-col-md3">融资申请金额:</div>
+        <div class="layui-col-md5">
+          <input type="text" name="memberEnterpriseName" autocomplete="off" class="layui-input" />
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<script>
+  $('#searchList').on('click', function () {
+    alert(1)
+  })
+  const container = document.getElementById('cardTwo');
+  const addBtn = document.getElementById('add-btn');
+  //添加发票
+  domBtn()
+  // 添加元素的函数
+  function addElement() {
+    domBtn()
+  }
+  addBtn.addEventListener('click', addElement);
+  function domBtn() {
+    var newElement = document.createElement('div')
+    newElement.innerHTML = $("#invoice-input-tsingtao").html();
+    var removeBtn = newElement.querySelector('.remove-btn');
+    //DOM 元素添加监听事件
+    removeBtn.addEventListener('click', () => {
+      var contract = $("#cardTwo .cardCommon");
+      console.log(contract.length, "hahha")
+      if (contract.length > 1) {
+        container.removeChild(newElement);
+        cardCommon()
+      }
+    });
+    container.appendChild(newElement);
+    cardCommon()
+  }
+  function cardCommon() {
+    var contract = $("#cardTwo .cardCommon");
+    for (var i = 0; i < contract.length; i++) {
+      $($("#cardTwo .cardCommon")[i])
+        .find(".index")
+        .html(i + 1);
+    }
+  }
+</script>
